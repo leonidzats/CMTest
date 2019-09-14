@@ -7,20 +7,21 @@ namespace Netflix.Models
     {
         public string Id{get;private set;}
         public string Title{get;private set;}
-        public float UserRank{get;private set;}
+        public string UserRank{get;private set;}
         public string ImdbRank{get;private set;}
         public DateTime EntryDate {get;private set;}
 
         public void UpdateUserRank(float new_rank){
-            this.UserRank = new_rank;
+            this.UserRank = new_rank.ToString(".0");
         }
 
-        public UserHistoryEntry(string id,string title,string ImdbRank)
+        public UserHistoryEntry(string id,string title,string ImdbRank,float userRank=0)
         {
             this.Id = id;
             this.Title = title;
             this.ImdbRank = ImdbRank;
             this.EntryDate = DateTime.Now;
+            this.UserRank = userRank.ToString(".0");
         }
 
         public override string ToString(){
