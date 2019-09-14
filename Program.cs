@@ -13,13 +13,12 @@ namespace dotnetproj
     {
         static IServiceProvider BootstrapServices(string[] args){
             bool is_persistent = args.Contains("--persistToLocal");
+            var coolection = new ServiceCollection();
 
-            var coolection = new ServiceCollection()
-            .AddSingleton<LocalStorage>()
-            .AddSingleton<LocalStorageRepository>();
-
-            if (is_persistent)
-                coolection.AddSingleton<IUserRepository,LocalStorageRepository>();
+            if (is_persistent){
+                coolection.AddSingleton<LocalStorage>()
+                .AddSingleton<IUserRepository,LocalStorageRepository>();
+            }
             else
                 coolection.AddSingleton<IUserRepository,InMemoryRepository>();
             
@@ -27,8 +26,12 @@ namespace dotnetproj
             .AddSingleton<NetflixApp>();
            return coolection.BuildServiceProvider();
         }
-        static bool handleCommand(NetflixApp app,string command,ref string user_id){
+        static bool handleCommand(NetflixApp app,ref string user_id){
+            Console.WriteLine("content (c) , history (h) , exit (e) , switch user(s): ");
+            var command = Console.ReadKey().KeyChar.ToString();
+            Console.WriteLine();
             bool stop_execution = false;
+
             switch(command){    
                 case "e":
                 case "E":
@@ -112,10 +115,7 @@ namespace dotnetproj
                 {
                     try
                     {
-                        Console.WriteLine("content (c) , history (h) , exit (e) , switch user(s): ");
-                        var command = Console.ReadKey().KeyChar.ToString();
-                        Console.WriteLine();
-                        stop = handleCommand(app,command,ref user_id);    
+                        stop = handleCommand(app,ref user_id);    
                     }
                     catch (System.Exception inner_ex)
                     {
