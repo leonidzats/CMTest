@@ -1,3 +1,7 @@
+clone the repo:
+    
+    git clone https://github.com/leonidzats/CMTest.git
+
 To execute regular in memory:
 
     dotnet run
@@ -39,6 +43,7 @@ API we’ll use:
 Each request will give a new random show/movie to watch.
 
 Response – is a JSON object, for example:
+
 ```json
     {
        "id":"29fbd74a-f25a-40eb-9393-449e35c9f118",
@@ -58,5 +63,5 @@ Response – is a JSON object, for example:
        "seen":false,
        "content_type":"m"
     }
-    
+    ```
 We want to save and show the fields marked in yellow once a user has requested a random Netflix movie/show.
