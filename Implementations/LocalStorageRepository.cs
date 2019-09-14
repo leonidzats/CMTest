@@ -27,14 +27,14 @@ namespace Netflix.App
         }
 
         public override void UpdateUserHistory(string user_id, string id, float rank){
-            IUser user = getAddUser(user_id);
+            IUser user = GetAddUser(user_id);
             user.UpdateHistory(id,rank);
             this.storeProvider.Store(user_id,new PersistentUser((User)user));
             this.storeProvider.Persist();
         }
 
         public override void AddToUserHistory(string user_id, string id, string title, string imdb_rating){
-            IUser user = getAddUser(user_id);
+            IUser user = GetAddUser(user_id);
             user.AddToHistory(id,title,imdb_rating);
             this.storeProvider.Store(user_id,new PersistentUser((User)user));
             this.storeProvider.Persist();

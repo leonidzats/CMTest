@@ -5,7 +5,7 @@ namespace Netflix.App
 {
     public abstract class AbstractUserRepository : IUserRepository
     {
-         public IUser getAddUser(string user_id)
+         public IUser GetAddUser(string user_id)
          {
                 BeforeGetUser(user_id);
                 IUser user = GetUser(user_id);
@@ -19,25 +19,25 @@ namespace Netflix.App
 
         public List<UserHistoryEntry> GetUserHistory(string user_id)
         {
-            IUser user = getAddUser(user_id);
+            IUser user = GetAddUser(user_id);
             return user.GetUserHistory();
         }
 
         public virtual void UpdateUserHistory(string user_id, string id, float rank)
         {
-             IUser user = getAddUser(user_id);
+             IUser user = GetAddUser(user_id);
              user.UpdateHistory(id,rank);
         }
 
         public virtual void AddToUserHistory(string user_id, string id, string title, string imdb_rating)
         {
-            IUser user = getAddUser(user_id);
+            IUser user = GetAddUser(user_id);
             user.AddToHistory(id,title,imdb_rating);
         }
 
         public bool UserHasWatched(string user_id, string watchable_id)
         {
-            IUser user = getAddUser(user_id);
+            IUser user = GetAddUser(user_id);
             return user.HasWatched(watchable_id);
         }
 

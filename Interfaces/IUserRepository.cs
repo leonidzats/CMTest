@@ -4,7 +4,7 @@ using Netflix.Models;
 namespace Netflix.App
 {
     public interface IUserRepository{
-        IUser getAddUser(string user_id);
+        IUser GetAddUser(string user_id);
 
         List<UserHistoryEntry> GetUserHistory(string user_id);
         void UpdateUserHistory(string user_id,string id,float rank);

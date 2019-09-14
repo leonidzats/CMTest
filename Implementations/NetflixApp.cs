@@ -15,7 +15,7 @@ namespace Netflix.App
                 this.netflixApi = netflix_api;
             }
             public bool login(string username){
-                this.userRepository.getAddUser(username);
+                this.userRepository.GetAddUser(username);
                 return true;
             }
 
