@@ -12,5 +12,7 @@ namespace Netflix.App
         void AddToUserHistory(string user_id,string id,string title, string imdb_rating);
 
         bool UserHasWatched(string user_id,string watchable_id);
+
+        void Disconnect();
     }
 }

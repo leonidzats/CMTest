@@ -40,5 +40,7 @@ namespace Netflix.App
             IUser user = getAddUser(user_id);
             return user.HasWatched(watchable_id);
         }
+
+        public virtual void Disconnect(){}
     }
 }

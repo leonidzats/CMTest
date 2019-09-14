@@ -91,16 +91,25 @@ namespace dotnetproj
         }
         static void Main(string[] args)
         {
+            NetflixApp app = null;
+            bool stop = false;
             try
             {
+                Console.CancelKeyPress += delegate{
+                    if (app != null){
+                        app.Close();                       
+                    }
+                    stop = true;
+                    //Environment.Exit(0);
+                };
                 var serviceProvider = BootstrapServices(args);
-                var app = serviceProvider.GetService<NetflixApp>();
-                bool stop = false;
+                app = serviceProvider.GetService<NetflixApp>();
                 Console.Write("user name: ");
                 var user_id = Console.ReadLine();
                 app.login(user_id);
                 
-                while (!stop){
+                while (!stop)
+                {
                     try
                     {
                         Console.WriteLine("content (c) , history (h) , exit (e) , switch user(s): ");
@@ -116,14 +125,23 @@ namespace dotnetproj
                         Console.WriteLine();
                         Console.Clear();
                     }
+                                
                 }
                 Console.WriteLine("bye bye!");    
             }
             catch (System.Exception global_ex)
             {
+                if (app != null){
+                    app.Close();
+                }
                 Console.WriteLine($"a fatal error has occured : {global_ex.Message}");
                 Console.WriteLine("press any key to quit");
                 Console.ReadKey();
+            }
+            finally{
+                if (app != null){
+                    app.Close();
+                }
             }
             
         }

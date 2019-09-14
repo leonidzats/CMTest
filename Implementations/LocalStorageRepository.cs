@@ -16,7 +16,6 @@ namespace Netflix.App
             if (!this.storeProvider.Exists(user_id)){
                 PersistentUser user = new PersistentUser(new User());
                 this.storeProvider.Store(user_id,user);
-                this.storeProvider.Persist();
             }
         }
 
@@ -30,15 +29,16 @@ namespace Netflix.App
             IUser user = getAddUser(user_id);
             user.UpdateHistory(id,rank);
             this.storeProvider.Store(user_id,new PersistentUser((User)user));
-            this.storeProvider.Persist();
         }
 
         public override void AddToUserHistory(string user_id, string id, string title, string imdb_rating){
             IUser user = getAddUser(user_id);
             user.AddToHistory(id,title,imdb_rating);
             this.storeProvider.Store(user_id,new PersistentUser((User)user));
-            this.storeProvider.Persist();
         }
 
+        public override void Disconnect(){
+            this.storeProvider.Persist();
+        }
     }
 }

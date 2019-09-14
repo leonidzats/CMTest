@@ -19,6 +19,9 @@ namespace Netflix.App
                 return true;
             }
 
+            public void Close(){
+                this.userRepository.Disconnect();
+            }
             public List<UserHistoryEntry> GetUserHistory(string username){
                 return this.userRepository.GetUserHistory(username);
             }
